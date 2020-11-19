@@ -1,0 +1,31 @@
+db-a /etc/puppet -> puppet.conf
+
+[main]
+ssldir = /var/lib/puppet/ssl
+
+[master]
+certname= db-a.foo.org.nz
+vardir = /var/lib/puppet
+cadir  = /var/lib/puppet/ssl/ca
+dns_alt_names = puppet
+
+______________________________________________________________________________________________________________
+app-a/etc/puppet -> puppet.conf
+
+[main]
+logdir=/var/log/puppet
+vardir=/var/lib/puppet
+ssldir=/var/lib/puppet/ssl
+rundir=/run/puppet
+factpath=$vardir/lib/facter
+# rerun_command=/etc/puppet/etckeeper-commit-pre
+# postrun_command=/etc/puppet/etckeeper-commit-post
+
+[master]
+certname = app-a.foo.org.nz
+# These are needed when the puppetmaster is run by passenger
+# and can safely be removed if webrick is used.
+ssl_client_header = SSL_CLIENT_S_DN
+ssl_client_verify_header = SSL_CLIENT_VERIFY
+________________________________________________________________________________________________________________
+

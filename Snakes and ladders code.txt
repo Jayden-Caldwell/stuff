@@ -1,0 +1,74 @@
+using System;
+using System.Threading;
+namespace Jayden_Caldwell_IN510_Programming_1_Exam
+{
+    class Program
+    {
+        static void Main()
+        {
+            int dial, player = 0, computer = 0, space = 0;                                                                  // assigning variables
+            Random rand = new Random();                                                                                     // generating a random number class
+
+            Console.WriteLine("#########################");
+            Console.WriteLine("##  Jayden Caldwell    ##");
+            Console.WriteLine("##  Programming exam   ##");
+            Console.WriteLine("## Snakes and ladders  ##");
+            Console.WriteLine("#########################");
+            Console.ReadLine();
+
+            Console.WriteLine("##############################################");
+            Console.WriteLine("##  Welcome to the snakes and ladders game  ##");
+            Console.WriteLine("##############################################");
+            Console.ReadLine();
+            Console.WriteLine("You and the computer are currently at {0}\n", space);                                         // Strating the game both on 0
+            Console.ReadLine();
+
+            do                                                                                                              // Do - while loop, used to keep lloping until the condition is met
+            {
+                dial = rand.Next(1, 11);                                                                                    //assigning the randowm number to the dial variable 
+                Console.WriteLine("The dial spins and you get a {0}", dial);                                                //Displays to the user what has been rolled
+                player = player + dial;                                                                                     //adds player with player then adds the dial, this is what is used to display how far down the board the player is 
+                Console.WriteLine("Player is now on space {0} on the board\n", player);
+                Thread.Sleep(1000);                                                                                         // delays the game for 1000ms (1 second)
+
+                dial = rand.Next(1, 11);                                                                                    //same as statet above but for the computer this time
+                Console.WriteLine("The computer rolls and gets a {0}", dial);
+                computer = computer + dial;                                                                                 // same as stated above but for the computer
+                Console.WriteLine("Computer is now on space {0} on the board\n", computer);
+                Thread.Sleep(1000);
+
+                if ((player == 25) || (player == 50) || (player == 75))                                                     // if statement used if the player lands on a snake
+                {
+                    player = player - 10;                                                                                   //player goes back 10 times
+                    Console.WriteLine("Rats you hit a snake annd have been sent back to {0}\n", player);
+                }
+                else if ((computer == 25) || (computer == 50) || (computer == 75))                                          //if statement if the computer lands on a snake
+                {
+                    computer = computer - 10;                                                                               //computer goes back 10 times
+                    Console.WriteLine("The computer hit a snake and has been sent back to {0}\n", computer);
+                }
+                else if ((player == 30) || (player == 60) || (player == 90))                                                // if the played lands on a ladder
+                {
+                    player = player + 20;                                                                                   //player progresses 20 tiles
+                    Console.WriteLine("You reached a ladder and have progressed to space {0}\n", player);
+                }
+                else if ((computer == 30) || (computer == 60) || (computer == 90))                                          // if the computer lands on a ladder
+                {
+                    computer = computer + 20;                                                                               // computer progresses 20 tiles
+                    Console.WriteLine("Computer reached a ladder and is now at space {0}\n", computer);
+                }
+
+            } while ((computer <= 100) && (player <= 100));                                                                  //While loops until at least one of the conditions are met
+
+            if (computer >= 100)                                                                                             // if computer is greater or equal >= 100 computer wins
+            {
+                Console.WriteLine("The computer has won!");
+            }
+            else if (player >= 100)                                                                                          // if player is greater or equal >= 100 player wins 
+            {
+                Console.WriteLine("The player has won the game");
+            }
+            Console.ReadLine();                                                                                             // readline to delay the code and close once anykey is pressed   
+        }
+    }
+}
